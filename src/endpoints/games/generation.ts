@@ -1,5 +1,6 @@
 import type { Generation, NamedAPIResourceList } from "../../types/poke-api.js";
 import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
+import { BASE_API_URL } from "../../constants.js";
 
 /**
  * Fetches a Pokémon generation by its name or ID. Intended only for internal
@@ -16,7 +17,7 @@ import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
 async function _fetchGeneration(
   nameOrId: string | number
 ): Promise<Result<Generation, PokeSdkHttpError>> {
-  const response = await fetch(`${__BASE_API_URL__}/generation/${nameOrId}`);
+  const response = await fetch(`${BASE_API_URL}/generation/${nameOrId}`);
   if (response.ok) return [await response.json(), null];
   return [null, await PokeSdkHttpError.fromResponse(response)];
 }
@@ -103,7 +104,7 @@ export async function getGenerationById(
 export async function listGenerations(): Promise<
   Result<NamedAPIResourceList, PokeSdkHttpError>
 > {
-  const response = await fetch(`${__BASE_API_URL__}/generation`);
+  const response = await fetch(`${BASE_API_URL}/generation`);
   if (response.ok) return [await response.json(), null];
   return [null, await PokeSdkHttpError.fromResponse(response)];
 }

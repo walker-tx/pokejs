@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "../../constants.js";
 import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
 /**
  * Fetches a Pokémon by its name or ID from the Pokémon API.
@@ -9,7 +10,7 @@ import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
  * to a Result containing either the fetched Pokémon data or an error.
  */
 async function _fetchPokemon(nameOrId) {
-    const response = await fetch(`${__BASE_API_URL__}/pokemon/${nameOrId}`);
+    const response = await fetch(`${BASE_API_URL}/pokemon/${nameOrId}`);
     if (response.ok)
         return [await response.json(), null];
     return [null, await PokeSdkHttpError.fromResponse(response)];
@@ -88,7 +89,7 @@ export async function getPokemonById(id) {
  * @see https://pokeapi.co/docs/v2#named
  */
 export async function listPokemon() {
-    const response = await fetch(`${__BASE_API_URL__}/pokemon`);
+    const response = await fetch(`${BASE_API_URL}/pokemon`);
     if (response.ok)
         return [await response.json(), null];
     return [null, await PokeSdkHttpError.fromResponse(response)];

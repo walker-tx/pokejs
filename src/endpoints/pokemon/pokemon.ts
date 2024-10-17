@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "../../constants.js";
 import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
 import type { NamedAPIResourceList, Pokemon } from "../../types/poke-api.js";
 
@@ -13,7 +14,7 @@ import type { NamedAPIResourceList, Pokemon } from "../../types/poke-api.js";
 async function _fetchPokemon(
   nameOrId: string | number
 ): Promise<Result<Pokemon, PokeSdkHttpError>> {
-  const response = await fetch(`${__BASE_API_URL__}/pokemon/${nameOrId}`);
+  const response = await fetch(`${BASE_API_URL}/pokemon/${nameOrId}`);
 
   if (response.ok) return [await response.json(), null];
 
@@ -103,7 +104,7 @@ export async function getPokemonById(
 export async function listPokemon(): Promise<
   Result<NamedAPIResourceList, PokeSdkHttpError>
 > {
-  const response = await fetch(`${__BASE_API_URL__}/pokemon`);
+  const response = await fetch(`${BASE_API_URL}/pokemon`);
 
   if (response.ok) return [await response.json(), null];
 
