@@ -1,0 +1,27 @@
+{
+  "name": "pokejs",
+  "description": "A PokeAPI JavaScript SDK.",
+  "license": "MIT",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vitest",
+    "build": "tsc",
+    "test": "vitest",
+    "ci": "pnpm run build && pnpm run check:format && pnpm run check:exports",
+    "format": "prettier --write .",
+    "check:format": "prettier --check .",
+    "check:exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.16.4",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.3",
+    "vitest": "^2.1.3"
+  }
+}
