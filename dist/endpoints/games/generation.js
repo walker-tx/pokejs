@@ -1,4 +1,4 @@
-import { PokeSdkClientError, PokeSdkHttpError } from "@/errors.js";
+import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
 /**
  * Fetches a Pokémon generation by its name or ID. Intended only for internal
  * use by the SDK.

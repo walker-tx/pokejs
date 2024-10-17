@@ -1,5 +1,5 @@
-import { PokeSdkClientError, PokeSdkHttpError } from "@/errors.js";
-import type { NamedAPIResourceList, Pokemon } from "@/types/poke-api.js";
+import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
+import type { NamedAPIResourceList, Pokemon } from "../../types/poke-api.js";
 
 /**
  * Fetches a Pokémon by its name or ID from the Pokémon API.
@@ -11,7 +11,7 @@ import type { NamedAPIResourceList, Pokemon } from "@/types/poke-api.js";
  * to a Result containing either the fetched Pokémon data or an error.
  */
 async function _fetchPokemon(
-  nameOrId: string | number,
+  nameOrId: string | number
 ): Promise<Result<Pokemon, PokeSdkHttpError>> {
   const response = await fetch(`${__BASE_API_URL__}/pokemon/${nameOrId}`);
 
@@ -41,7 +41,7 @@ async function _fetchPokemon(
  * @see https://pokeapi.co/docs/v2#pokemon
  */
 export async function getPokemonByName(
-  name: string,
+  name: string
 ): Promise<Result<Pokemon, PokeSdkClientError | PokeSdkHttpError>> {
   if (name === "") {
     return [
@@ -74,7 +74,7 @@ export async function getPokemonByName(
  * @see https://pokeapi.co/docs/v2#pokemon
  */
 export async function getPokemonById(
-  id: number,
+  id: number
 ): Promise<Result<Pokemon, PokeSdkHttpError>> {
   return _fetchPokemon(id);
 }

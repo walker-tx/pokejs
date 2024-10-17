@@ -1,3 +1,4 @@
+import "vite/modulepreload-polyfill";
 import { getGenerationById, getGenerationByName } from "./endpoints/games/generation.js";
 import { getPokemonById, getPokemonByName } from "./endpoints/pokemon/pokemon.js";
 export * from "./types/poke-api.js";

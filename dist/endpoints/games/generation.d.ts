@@ -1,5 +1,5 @@
-import type { Generation, NamedAPIResourceList } from "@/types/poke-api.js";
-import { PokeSdkClientError, PokeSdkHttpError } from "@/errors.js";
+import type { Generation, NamedAPIResourceList } from "../../types/poke-api.js";
+import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
 /**
  * Retrieves a Pokémon generation by its name.
  *

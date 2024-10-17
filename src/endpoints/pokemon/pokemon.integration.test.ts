@@ -1,5 +1,5 @@
-import { PokeSdkClientError, PokeSdkHttpError } from "@/errors.js";
-import type { NamedAPIResourceList, Pokemon } from "@/types/poke-api.js";
+import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
+import type { NamedAPIResourceList, Pokemon } from "../../types/poke-api.js";
 import {
   assert,
   assertType,

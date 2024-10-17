@@ -1,5 +1,5 @@
-import { PokeSdkClientError, PokeSdkHttpError } from "@/errors.js";
-import type { Generation, NamedAPIResourceList } from "@/types/poke-api.js";
+import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
+import type { Generation, NamedAPIResourceList } from "../../types/poke-api.js";
 import {
   assert,
   assertType,
@@ -28,7 +28,7 @@ describe("endpoints/games/generation", () => {
   describe("getGenerationByName", () => {
     it("should return the correct generation data when the API call is successful", async () => {
       const [data, error] = await getGenerationByName(
-        testData.getOneResult.name,
+        testData.getOneResult.name
       );
 
       // There should be data
@@ -47,7 +47,7 @@ describe("endpoints/games/generation", () => {
 
     it("should return an http error when the API call fails", async () => {
       const [data, error] = await getGenerationByName(
-        "non-existent-generation",
+        "non-existent-generation"
       );
 
       // When there's an error, there should be no data
