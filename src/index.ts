@@ -1,4 +1,3 @@
-import "vite/modulepreload-polyfill";
 import {
   getGenerationById,
   getGenerationByName,
