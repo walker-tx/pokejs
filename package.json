@@ -1,6 +1,6 @@
 {
   "name": "pokejs",
-  "description": "A PokeAPI JavaScript SDK.",
+  "description": "A PokéAPI JavaScript SDK.",
   "license": "MIT",
   "private": true,
   "version": "0.0.0",
