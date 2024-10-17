@@ -1,6 +1,7 @@
 import { BASE_API_URL } from "../../constants.js";
 import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
 import type { NamedAPIResourceList, Pokemon } from "../../types/poke-api.js";
+import type { Result } from "../../types/utility.js";
 
 /**
  * Fetches a Pokémon by its name or ID from the Pokémon API.

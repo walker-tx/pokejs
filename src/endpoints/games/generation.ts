@@ -1,6 +1,7 @@
 import type { Generation, NamedAPIResourceList } from "../../types/poke-api.js";
 import { PokeSdkClientError, PokeSdkHttpError } from "../../errors.js";
 import { BASE_API_URL } from "../../constants.js";
+import type { Result } from "../../types/utility.js";
 
 /**
  * Fetches a Pokémon generation by its name or ID. Intended only for internal
