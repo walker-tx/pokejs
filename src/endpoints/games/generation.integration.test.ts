@@ -139,7 +139,7 @@ describe("endpoints/games/generation", () => {
 
     it("should return an HTTP error when the API call fails", async () => {
       // Mock the fetch function to return a 404 error
-      global.fetch = vi.fn().mockResolvedValue({
+      globalThis.fetch = vi.fn().mockResolvedValue({
         ok: false,
         status: 404,
         text: () => new Promise((resolve) => resolve("Mock Not Found Message")),
