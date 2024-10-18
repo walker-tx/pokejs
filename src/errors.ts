@@ -1,19 +1,19 @@
 /**
- * Represents an HTTP error specific to the PokeAPI SDK.
+ * Represents an HTTP error specific to PokéJS.
  *
  * @extends Error
  *
  * @remarks
- * This error is thrown when an HTTP request to the PokeAPI fails.
+ * This error is thrown when an HTTP request to PokeAPI fails.
  * It includes the HTTP status code and the error message from the response.
  */
 export class PokeJsHttpError extends Error {
   constructor(
     public status: number,
-    public override message: string,
+    public override message: string
   ) {
     super(message);
-    this.name = "PokeApiSdkError";
+    this.name = "PokeJSError";
   }
 
   /**
@@ -28,14 +28,14 @@ export class PokeJsHttpError extends Error {
 }
 
 /**
- * Represents an error specific to the PokeClient or its usage.
+ * Represents an error specific to PokéJS or its usage.
  *
  * @extends {Error}
  *
  * @param {string} message - The error message.
  *
  * @remarks
- * This error is thrown when an error occurs in the PokeClient or its usage,
+ * This error is thrown when an error occurs in PokéJS or its usage,
  * such as an invalid parameter.
  */
 export class PokeJsClientError extends Error {

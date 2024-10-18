@@ -12,7 +12,7 @@ export interface APIResource {
 }
 
 /**
- * Represents a resource with a name and a URL as defined by the PokeAPI.
+ * Represents a resource with a name and a URL as defined by PokéAPI.
  *
  * @interface NamedAPIResource
  *
@@ -29,7 +29,7 @@ export interface NamedAPIResource {
 }
 
 /**
- * Represents a list of named API resources returned by the Pokémon API.
+ * Represents a list of named API resources returned by PokéAPI.
  *
  * @property count - The total number of resources available from this API.
  * @property next - The URL for the next page in the list, or null if there is no next page.
