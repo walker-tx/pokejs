@@ -30,18 +30,19 @@ async function _fetchPokemon(
  * Fetches a Pokémon by its name.
  *
  * @param {string} name - The name of the Pokémon to fetch.
-
+ *
  * @returns {Promise<Result<Pokemon, PokeJsClientError | PokeJsHttpError>>} A
- * promise that resolves to a tuple containing the Pokémon data or an error.
+ * promise that resolves to a Result containing either the fetched Pokémon data
+ * or an error.
  *
  * @example
  * ```ts
- * const [pokemon, error] = await getPokemonByName("pikachu");
+ * const result = await getPokemonByName("pikachu");
  *
- * if (error) {
- *   console.error(`Failed to fetch Pokémon: ${error.message}`);
+ * if (!result.ok) {
+ *   console.error(`Failed to fetch Pokémon: ${result.error.message}`);
  * } else {
- *   console.log(`Fetched Pokémon: ${pokemon.name}`);
+ *   console.log(`Fetched Pokémon: ${result.data.name}`);
  * }
  * ```
  * @see https://pokeapi.co/docs/v2#pokemon
@@ -63,8 +64,9 @@ export async function getPokemonByName(
  * Retrieves a Pokémon by its ID.
  *
  * @param id - The unique identifier of the Pokémon.
- * @returns A promise that resolves to a `Result` containing either the
- * `Pokemon` data or a `PokeJsHttpError`.
+ *
+ * @returns {Promise<Result<Pokemon, PokeJsHttpError>>} A promise that resolves
+ * to a Result containing either the fetched Pokémon data or an error.
  *
  * @example
  * ```ts

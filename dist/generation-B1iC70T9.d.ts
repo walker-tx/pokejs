@@ -6,17 +6,18 @@ import { cx as Result, Q as Generation, cy as PokeJsClientError, cz as PokeJsHtt
  * @param name - The name of the generation to retrieve.
  *
  * @returns {Promise<Result<Generation, PokeJsClientError | PokeJsHttpError>>} A
- * promise that resolves to a tuple containing the generation data or an error.
+ * promise that resolves to an object containing either the generation data or an error.
  *
  * @example
  * ```ts
- * const [generation, error] = await getGenerationByName("generation-i");
+ * const result = await getGenerationByName("generation-i");
  *
- * if (error) {
- *  console.error(`Failed to fetch generation: ${error.message}`);
+ * if (!result.ok) {
+ *  console.error(`Failed to fetch generation: ${result.error.message}`);
  * } else {
- *  console.log(`Fetched generation: ${generation.name}`);
+ *  console.log(`Fetched generation: ${result.data.name}`);
  * }
+ * ```
  */
 declare function getGenerationByName(name: string): Promise<Result<Generation, PokeJsClientError | PokeJsHttpError>>;
 /**
@@ -25,16 +26,16 @@ declare function getGenerationByName(name: string): Promise<Result<Generation, P
  * @param id - The ID of the generation to fetch.
  *
  * @returns {Promise<Result<Generation, PokeJsHttpError>>} A promise that
- * resolves to a tuple containing the generation data or an error.
+ * resolves to an object containing either the generation data or an error.
  *
  * @example
  * ```ts
- * const [generation, error] = await getGenerationById(1);
+ * const result = await getGenerationById(1);
  *
- * if (error) {
- *  console.error(`Failed to fetch generation: ${error.message}`);
+ * if (!result.ok) {
+ *  console.error(`Failed to fetch generation: ${result.error.message}`);
  * } else {
- *  console.log(`Fetched generation: ${generation.name}`);
+ *  console.log(`Fetched generation: ${result.data.name}`);
  * }
  * ```
  *

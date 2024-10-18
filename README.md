@@ -14,6 +14,7 @@ well-organized, well-typed, and predictable!
 - [Documentation](#documentation)
   - [Results & Error Handling](#results--error-handling)
   - [Groups & Methods](#groups--methods)
+  - [Pagination](#pagination)
   - [Tree Shaking](#tree-shaking)
   - [Response Caching](#response-caching)
 - [Contributing](#contributing)
@@ -42,39 +43,54 @@ The easiest way to get started with PokéJS is to import the `PokeJS` object:
 import { PokeJS } from "pokejs";
 ```
 
-Once imported, you can find methods on each field that corresponds with the API groups:
+Once imported, you can find methods on each field that corresponds with the API
+groups:
 
 ```ts
-const [pokemon, error] = await PokeJS.pokemon.getPokemonByName("pikachu");
-const [pokemon, error] = await PokeJS.pokemon.getPokemonById(25);
+const result = await PokeJS.pokemon.getPokemonByName("pikachu");
+
+if (result.ok) {
+  console.log(result.data);
+} else {
+  console.error(result.error);
+}
 ```
 
 ## Documentation
 
 ### Results & Error Handling
 
-PokéJS wraps responses in a `Result` object, which contains the data and an error object:
+PokéJS wraps responses in a `Result` object, which is defined as follows:
+
+```ts
+export type Result<TValue, TError> =
+  | { ok: false; error: TError }
+  | { ok: true; data: TValue };
+```
+
+Each method in PokéJS returns a `Result` object, allowing for explicit error
+handling:
 
 ```ts
 import { PokeJS } from "pokejs";
 
-const [pokemon, error] = await PokeJS.pokemon.getPokemonByName("pikachu");
+const result = await PokeJS.pokemon.getPokemonByName("pikachu");
 
-if (error) {
-  console.error(error);
+if (result.ok) {
+  console.log(result.data);
 } else {
-  console.log(pokemon);
+  console.error(result.error);
 }
 ```
 
-In this pattern, the first element of the array is the data returned from the
-API, and the second is an error object. If the error object is `null`, then the
-request was successful.
+In this pattern, the result is an object with either a `data` field (if the
+request was successful) or an `error` field (if the request failed). This
+pattern ensures errors are handled explicitly and not through exceptions.
 
-> NOTE: The `Result` pattern is inspired by the `Go` programming language. It
-> enables explicit error handling, improving code clarity, control flow, and
-> reliability by requiring developers to handle errors at each step without
-> relying on exceptions.
+> NOTE: The `Result` pattern is inspired by the `Go`, `Swift`, and `Rust`
+> programming languages. It enables explicit error handling, improving code
+> clarity, control flow, and reliability by requiring developers to handle
+> errors at each step without relying on exceptions.
 
 ### Groups & Methods
 
@@ -87,6 +103,11 @@ groups and methods are as follows:
 ```ts
 getPokemonByName(name: string): Promise<Result<Pokemon, Error>>;
 getPokemonById(id: number): Promise<Result<Pokemon, Error>>;
+listPokemon(
+  paginationInput?: { limit: number, offset: number },
+): Promise<
+  PaginatedResult<NamedAPIResourceList, Error>
+>
 ```
 
 #### `PokeJS.game`
@@ -94,7 +115,63 @@ getPokemonById(id: number): Promise<Result<Pokemon, Error>>;
 ```ts
 getGenerationByName(name: string): Promise<Result<Generation, Error>>;
 getGenerationById(id: number): Promise<Result<Generation, Error>>;
+listGenerations(
+  paginationInput?: { limit: number, offset: number },
+): Promise<
+  PaginatedResult<NamedAPIResourceList, Error>
+>
 ```
+
+### Pagination
+
+PokéJS makes it easy to handle paginated results when working with large lists. Here's a quick guide to using pagination with the `list*` methods.
+
+To start, fetch the first page:
+
+By default, the `list*` functions fetch the first 20 items. You can start by calling a `list*` method like this:
+
+```ts
+const result = await PokeJS.game.listGenerations();
+
+if (!result.ok) {
+  console.error(result.error.message);
+} else {
+ . console.log(`Fetched ${result.data.results.length} generations`);
+}
+```
+
+If you want to fetch more or fewer items, or start from a specific point in the list, use `limit` and `offset`:
+
+```ts
+const result = await PokeJS.game.listGenerations({ limit: 10, offset: 0 });
+
+if (result.ok) {
+  console.log(`Fetched ${result.data.results.length} generations`);
+}
+```
+
+- **limit**: Number of items to fetch (e.g., 10).
+- **offset**: Where to start (e.g., 0 for the first item).
+
+To fetch the next set of items, check if `result.next` exists and call it:
+
+```ts
+if (result.ok && result.next) {
+  const nextResult = await result.next();
+  console.log(`Fetched ${nextResult.data.results.length} more generations`);
+}
+```
+
+Similarly, you can fetch the previous page by checking `result.previous`:
+
+```ts
+if (result.ok && result.previous) {
+  const prevResult = await result.previous();
+  console.log(`Fetched ${prevResult.data.results.length} previous generations`);
+}
+```
+
+For more information on how pagination works with PokéAPI, refer to the [PokéAPI documentation](https://pokeapi.co/docs/v2#resource-listspagination-section).
 
 ### Response Caching
 
@@ -102,13 +179,15 @@ PokéAPI doesn't support caching itself, but it can be used alongside libraries
 like [TanStack
 Query](https://tanstack.com/query/latest/docs/framework/react/overview).
 
-First, install the TanStack Query library for the framework or UI library of your choosing.
+First, install the TanStack Query library for the framework or UI library of
+your choosing.
 
 ```bash
 pnpm add @tanstack/react-query
 ```
 
-Since we're demonstrating with React, you'll wrap your app in a `QueryClientProvider`:
+Since we're demonstrating with React, you'll wrap your app in a
+`QueryClientProvider`:
 
 ```tsx
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -126,7 +205,7 @@ const App = () => {
 export default App;
 ```
 
-Then, use useQuery to fetch data with PokéJS and cache the response:
+Then, use `useQuery` to fetch data with PokéJS and cache the response:
 
 ```tsx
 const MyComponent = () => {
@@ -177,17 +256,23 @@ Thus, in PokéJS, the corresponding group is `PokeJS.game` and the method is
 `getGenerationByName`:
 
 ```ts
-const [data, error] = await PokeJS.game.getGenerationByName("generation-i");
+const result = await PokeJS.game.getGenerationByName("generation-i");
+
+if (result.ok) {
+  console.log(result.data);
+} else {
+  console.error(result.error);
+}
 ```
 
 ### Robust Typing
 
-PokéJS is thoroughly typed - no `any`s in sight! This makes it easier to learn
-and use by providing clear definitions of functions, parameters, and return
-types. This reduces guesswork, helping developers understand how to use the SDK
-more quickly and preventing common errors. It also improves tooling support,
-like autocompletion and inline documentation, and catches issues at compile
-time, leading to fewer runtime errors and a more reliable development process.
+PokéJS is thoroughly typed—no `any`s in sight! This makes it easier to learn and
+use by providing clear definitions of functions, parameters, and return types.
+This reduces guesswork, helping developers understand how to use the SDK more
+quickly and preventing common errors. It also improves tooling support, like
+autocompletion and inline documentation, and catches issues at compile time,
+leading to fewer runtime errors and a more reliable development process.
 
 ### Thorough JSDoc
 
@@ -199,15 +284,15 @@ directly in your editor.
 
 ### Result Pattern
 
-The Result pattern in PokéJS improves predictability by returning a consistent
-tuple `[data, error]` for every operation. This forces developers to choose how
-to handle both success and failure explicitly, thus reducing unhandled
-exceptions and crashes.
+The `Result` pattern in PokéJS improves predictability by returning a consistent
+object with an `ok` flag, making it explicit whether the operation was
+successful or not. This forces developers to choose how to handle both success
+and failure explicitly, thus reducing unhandled exceptions and crashes.
 
 ### Method Signatures & Naming
 
-PokéJS also avoids method overrides and using clear, single-signature typing.
-The API easier to understand and more consistent. Developers don’t have to flip
+PokéJS also avoids method overrides and uses clear, single-signature typing. The
+API is easier to understand and more consistent. Developers don’t have to flip
 through method overrides to find the one they need. Methods are named very
 explicitly, describing the kind of parameter they're expecting (e.g., `name` or
 `id`), to make code easier to read at a glance.
@@ -237,7 +322,8 @@ To contribute to the PokéJS library, follow this process:
 9. **Merge**: Once approved, your contribution will be merged into the main
    PokéJS library.
 
-This ensures a structured, collaborative process when contributing to the library.
+This ensures a structured, collaborative process when contributing to the
+library.
 
 ### Testing
 

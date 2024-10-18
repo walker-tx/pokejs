@@ -15,7 +15,7 @@ import type {
  * to fetch.
  *
  * @returns {Promise<Result<Generation, PokeJsHttpError>>} A promise that
- * resolves to a tuple containing the generation data or an error.
+ * resolves to an object containing either the generation data or an error.
  *
  * @see https://pokeapi.co/docs/v2#generation
  */
@@ -33,17 +33,18 @@ async function _fetchGeneration(
  * @param name - The name of the generation to retrieve.
  *
  * @returns {Promise<Result<Generation, PokeJsClientError | PokeJsHttpError>>} A
- * promise that resolves to a tuple containing the generation data or an error.
+ * promise that resolves to an object containing either the generation data or an error.
  *
  * @example
  * ```ts
- * const [generation, error] = await getGenerationByName("generation-i");
+ * const result = await getGenerationByName("generation-i");
  *
- * if (error) {
- *  console.error(`Failed to fetch generation: ${error.message}`);
+ * if (!result.ok) {
+ *  console.error(`Failed to fetch generation: ${result.error.message}`);
  * } else {
- *  console.log(`Fetched generation: ${generation.name}`);
+ *  console.log(`Fetched generation: ${result.data.name}`);
  * }
+ * ```
  */
 export async function getGenerationByName(
   name: string,
@@ -66,16 +67,16 @@ export async function getGenerationByName(
  * @param id - The ID of the generation to fetch.
  *
  * @returns {Promise<Result<Generation, PokeJsHttpError>>} A promise that
- * resolves to a tuple containing the generation data or an error.
+ * resolves to an object containing either the generation data or an error.
  *
  * @example
  * ```ts
- * const [generation, error] = await getGenerationById(1);
+ * const result = await getGenerationById(1);
  *
- * if (error) {
- *  console.error(`Failed to fetch generation: ${error.message}`);
+ * if (!result.ok) {
+ *  console.error(`Failed to fetch generation: ${result.error.message}`);
  * } else {
- *  console.log(`Fetched generation: ${generation.name}`);
+ *  console.log(`Fetched generation: ${result.data.name}`);
  * }
  * ```
  *
