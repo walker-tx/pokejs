@@ -10,7 +10,7 @@
 export class PokeJsHttpError extends Error {
   constructor(
     public status: number,
-    public override message: string
+    public override message: string,
   ) {
     super(message);
     this.name = "PokeJSError";

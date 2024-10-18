@@ -7,7 +7,7 @@ var PokeJsHttpError = class _PokeJsHttpError extends Error {
     super(message);
     this.status = status;
     this.message = message;
-    this.name = "PokeApiSdkError";
+    this.name = "PokeJSError";
   }
   /**
    * Creates a `PokeHttpError` instance from a given HTTP response.

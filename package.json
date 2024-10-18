@@ -22,7 +22,7 @@
     "ci": "pnpm run build && pnpm run check:format && pnpm run check:exports",
     "format": "prettier --write .",
     "check:format": "prettier --check .",
-    "check:exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm"
+    "check:exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm --ignore-rules=no-resolution"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",

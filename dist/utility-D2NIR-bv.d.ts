@@ -1,10 +1,10 @@
 /**
- * Represents an HTTP error specific to the PokeAPI SDK.
+ * Represents an HTTP error specific to PokéJS.
  *
  * @extends Error
  *
  * @remarks
- * This error is thrown when an HTTP request to the PokeAPI fails.
+ * This error is thrown when an HTTP request to PokeAPI fails.
  * It includes the HTTP status code and the error message from the response.
  */
 declare class PokeJsHttpError extends Error {
@@ -20,14 +20,14 @@ declare class PokeJsHttpError extends Error {
     static fromResponse(response: Response): Promise<PokeJsHttpError>;
 }
 /**
- * Represents an error specific to the PokeClient or its usage.
+ * Represents an error specific to PokéJS or its usage.
  *
  * @extends {Error}
  *
  * @param {string} message - The error message.
  *
  * @remarks
- * This error is thrown when an error occurs in the PokeClient or its usage,
+ * This error is thrown when an error occurs in PokéJS or its usage,
  * such as an invalid parameter.
  */
 declare class PokeJsClientError extends Error {
@@ -35,16 +35,44 @@ declare class PokeJsClientError extends Error {
     constructor(message: string);
 }
 
+/**
+ * Represents a reference to another resource in the API.
+ *
+ * @remarks
+ * This interface is used to define a resource that is referenced by its URL.
+ *
+ * @property url - The URL of the referenced resource.
+ */
 interface APIResource {
     /** The URL of the referenced resource. */
     url: string;
 }
+/**
+ * Represents a resource with a name and a URL as defined by PokéAPI.
+ *
+ * @interface NamedAPIResource
+ *
+ * @property {string} name - The name of the referenced resource.
+ * @property {string} url - The URL of the referenced resource.
+ *
+ * @see {@link https://pokeapi.co/docs/v2#namedapiresource}
+ */
 interface NamedAPIResource {
     /** The name of the referenced resource. */
     name: string;
     /** The URL of the referenced resource. */
     url: string;
 }
+/**
+ * Represents a list of named API resources returned by PokéAPI.
+ *
+ * @property count - The total number of resources available from this API.
+ * @property next - The URL for the next page in the list, or null if there is no next page.
+ * @property previous - The URL for the previous page in the list, or null if there is no previous page.
+ * @property results - A list of named API resources.
+ *
+ * @see {@link https://pokeapi.co/docs/v2#named}
+ */
 interface NamedAPIResourceList {
     /** The total number of resources available from this API. */
     count: number;
