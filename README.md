@@ -336,7 +336,7 @@ cleaner and ensures everything works smoothly with TypeScript’s type safety.
 
 ### Process
 
-To contribute to the PokéJS library, follow this process:
+To contribute to PokéJS, follow this process:
 
 1. **Fork the Repository**: Create a personal copy of the PokéJS repository on
    GitHub by forking it.
@@ -375,7 +375,7 @@ pnpm run test
 The aim is to make PokéJS to cover more endpoints from PokéAPI, providing a
 broader range of data and utilities for developers working with Pokémon data.
 This will ensure that PokéJS continues to evolve as a complete and reliable tool
-for interacting with the Pokémon API.
+for interacting with PokéAPI.
 
 ### Lazy Loading for NamedAPIResource Items
 
