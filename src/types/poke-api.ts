@@ -1,8 +1,26 @@
+/**
+ * Represents a reference to another resource in the API.
+ *
+ * @remarks
+ * This interface is used to define a resource that is referenced by its URL.
+ *
+ * @property url - The URL of the referenced resource.
+ */
 export interface APIResource {
   /** The URL of the referenced resource. */
   url: string;
 }
 
+/**
+ * Represents a resource with a name and a URL as defined by the PokeAPI.
+ *
+ * @interface NamedAPIResource
+ *
+ * @property {string} name - The name of the referenced resource.
+ * @property {string} url - The URL of the referenced resource.
+ *
+ * @see {@link https://pokeapi.co/docs/v2#namedapiresource}
+ */
 export interface NamedAPIResource {
   /** The name of the referenced resource. */
   name: string;
@@ -10,6 +28,16 @@ export interface NamedAPIResource {
   url: string;
 }
 
+/**
+ * Represents a list of named API resources returned by the Pokémon API.
+ *
+ * @property count - The total number of resources available from this API.
+ * @property next - The URL for the next page in the list, or null if there is no next page.
+ * @property previous - The URL for the previous page in the list, or null if there is no previous page.
+ * @property results - A list of named API resources.
+ *
+ * @see {@link https://pokeapi.co/docs/v2#named}
+ */
 export interface NamedAPIResourceList {
   /** The total number of resources available from this API. */
   count: number;

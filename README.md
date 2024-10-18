@@ -126,11 +126,34 @@ listGenerations(
 
 ### Pagination
 
-PokéJS makes it easy to handle paginated results when working with large lists. Here's a quick guide to using pagination with the `list*` methods.
+#### Summary
+
+PokéJS makes it easy to handle paginated results when working with large lists.
+
+It should be noted that, upon success, the `list*` methods in PokéJS return
+either a `NamedAPIResourceList` or an `APIResourceList`, which don't include the
+actual data themselves. Instead, they contain a `results` array where each item
+provides a reference URL to an endpoint where you can retrieve the full details.
+So, when you use a `list*` method, you're getting a list of resources with basic
+info, like names, and you'll need to use the provided URL to make another
+request to fetch the complete data. This design helps keep the initial responses
+lightweight and efficient.
+
+Hopefully, sometime in the near future, PokéJS will just make this data
+lazy-loadable for you!
+
+> For more information on how pagination works with PokéAPI (including
+> `NamedAPIResourceList` and `APIResourceList`), refer to the [PokéAPI
+> documentation](https://pokeapi.co/docs/v2#resource-listspagination-section).
+
+#### Guide
+
+Here's a quick guide to using pagination with the `list*` methods.
 
 To start, fetch the first page:
 
-By default, the `list*` functions fetch the first 20 items. You can start by calling a `list*` method like this:
+By default, the `list*` functions fetch the first 20 items. You can start by
+calling a `list*` method like this:
 
 ```ts
 const result = await PokeJS.game.listGenerations();
@@ -172,8 +195,6 @@ if (result.ok && result.previous) {
   console.log(`Fetched ${prevResult.data.results.length} previous generations`);
 }
 ```
-
-For more information on how pagination works with PokéAPI, refer to the [PokéAPI documentation](https://pokeapi.co/docs/v2#resource-listspagination-section).
 
 ### Tree Shaking
 
@@ -340,7 +361,7 @@ library.
 
 ### Testing
 
-To run the tests for PokéJS, you can use the following command:
+To run the tests for PokéJS, you can use the following command from the root of the cloned repository:
 
 ```bash
 pnpm run test
