@@ -10,9 +10,14 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./groups/games": "./dist/games.js",
+    "./groups/pokemon": "./dist/pokemon.js"
+  },
   "scripts": {
     "dev": "vitest",
-    "build": "rm -rf dist && tsup",
+    "build": "tsup",
     "test": "vitest",
     "ci": "pnpm run build && pnpm run check:format && pnpm run check:exports",
     "format": "prettier --write .",

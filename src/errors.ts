@@ -7,7 +7,7 @@
  * This error is thrown when an HTTP request to the PokeAPI fails.
  * It includes the HTTP status code and the error message from the response.
  */
-export class PokeSdkHttpError extends Error {
+export class PokeJsHttpError extends Error {
   constructor(
     public status: number,
     public override message: string,
@@ -22,8 +22,8 @@ export class PokeSdkHttpError extends Error {
    * @param response - The HTTP response object.
    * @returns A promise that resolves to a `PokeHttpError` instance.
    */
-  static async fromResponse(response: Response): Promise<PokeSdkHttpError> {
-    return new PokeSdkHttpError(response.status, await response.text());
+  static async fromResponse(response: Response): Promise<PokeJsHttpError> {
+    return new PokeJsHttpError(response.status, await response.text());
   }
 }
 
@@ -38,7 +38,7 @@ export class PokeSdkHttpError extends Error {
  * This error is thrown when an error occurs in the PokeClient or its usage,
  * such as an invalid parameter.
  */
-export class PokeSdkClientError extends Error {
+export class PokeJsClientError extends Error {
   constructor(public override message: string) {
     super(message);
   }
