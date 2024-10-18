@@ -27,6 +27,7 @@ well-organized, well-typed, and predictable!
 - [Contributing](#contributing)
   - [Process](#process)
   - [Testing](#testing)
+- [Roadmap](#roadmap)
 - [License](#license)
 
 ## Installation
@@ -366,6 +367,26 @@ To run the tests for PokéJS, you can use the following command from the root of
 ```bash
 pnpm run test
 ```
+
+## Roadmap for PokéJS
+
+### Expanded Feature Set
+
+The aim is to make PokéJS to cover more endpoints from PokéAPI, providing a
+broader range of data and utilities for developers working with Pokémon data.
+This will ensure that PokéJS continues to evolve as a complete and reliable tool
+for interacting with the Pokémon API.
+
+### Lazy Loading for NamedAPIResource Items
+
+In the future, PokéJS will support lazy loading for `NamedAPIResource` items.
+Instead of requiring developers to manually fetch detailed data for each
+resource, PokéJS will handle it automatically when the data is accessed. This
+will keep API calls strongly-typed, ensure data consistency, and eliminate the
+need for developers to write their own fetch logic, significantly reducing
+boilerplate code. With lazy loading, developers will be able to rely on PokéJS
+to handle data retrieval seamlessly, making the SDK more efficient and easier to
+use.
 
 ## License
 
