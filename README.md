@@ -16,15 +16,17 @@ well-organized, well-typed, and predictable!
   - [Groups & Methods](#groups--methods)
   - [Pagination](#pagination)
   - [Tree Shaking](#tree-shaking)
+- [Recipes](#recipes)
   - [Response Caching](#response-caching)
-- [Contributing](#contributing)
-  - [Process](#process)
-  - [Testing](#testing)
-- [Design Summary](#design)
+- [Design](#design)
   - [Parallel API & SDK Structure](#parallel-api--sdk-structure)
   - [Robust Typing](#robust-typing)
   - [Thorough JSDoc](#thorough-jsdoc)
   - [Result Pattern](#result-pattern)
+  - [Method Signatures & Naming](#method-signatures--naming)
+- [Contributing](#contributing)
+  - [Process](#process)
+  - [Testing](#testing)
 - [License](#license)
 
 ## Installation
@@ -173,6 +175,25 @@ if (result.ok && result.previous) {
 
 For more information on how pagination works with PokéAPI, refer to the [PokéAPI documentation](https://pokeapi.co/docs/v2#resource-listspagination-section).
 
+### Tree Shaking
+
+For Node 16 and newer, PokéJS is tree-shakeable. Tree shaking helps reduce
+bundle size by eliminating unused code. By importing only what you need, your
+bundle will be smaller.
+
+```ts
+// Import all available groups
+import { PokeJS } from "pokejs";
+
+// Import a single method for a group
+import { getPokemonById } from "pokejs/pokemon";
+
+// Import all methods for a group
+import * as Pokemon from "pokejs/pokemon";
+```
+
+## Recipes
+
 ### Response Caching
 
 PokéAPI doesn't support caching itself, but it can be used alongside libraries
@@ -210,7 +231,7 @@ Then, use `useQuery` to fetch data with PokéJS and cache the response:
 ```tsx
 const MyComponent = () => {
   const { data, error, isLoading } = useQuery(["pokemon", "pikachu"], () =>
-    PokeJS.pokemon.getPokemonByName("pikachu"),
+    PokeJS.pokemon.getPokemonByName("pikachu")
   );
 
   if (isLoading) return <div>Loading...</div>;
@@ -223,23 +244,6 @@ const MyComponent = () => {
     </div>
   );
 };
-```
-
-### Tree Shaking
-
-For Node 16 and newer, PokéJS is tree-shakeable. Tree shaking helps reduce
-bundle size by eliminating unused code. By importing only what you need, your
-bundle will be smaller.
-
-```ts
-// Import all available groups
-import { PokeJS } from "pokejs";
-
-// Import a single method for a group
-import { getPokemonById } from "pokejs/pokemon";
-
-// Import all methods for a group
-import * as Pokemon from "pokejs/pokemon";
 ```
 
 ## Design
@@ -296,6 +300,15 @@ API is easier to understand and more consistent. Developers don’t have to flip
 through method overrides to find the one they need. Methods are named very
 explicitly, describing the kind of parameter they're expecting (e.g., `name` or
 `id`), to make code easier to read at a glance.
+
+#### Pagination
+
+The pagination system in PokéJS is easier and safer than using the next and
+previous URLs from PokéAPI. Instead of dealing with URLs directly, PokéJS gives
+you next() and previous() methods that are built-in and fully typed. This makes
+it more reliable and reduces the chance of errors, so you can move between pages
+of results without worrying about handling URLs yourself. It keeps your code
+cleaner and ensures everything works smoothly with TypeScript’s type safety.
 
 ## Contributing
 
