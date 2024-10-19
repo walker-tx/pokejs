@@ -18,11 +18,12 @@
   "scripts": {
     "dev": "vitest",
     "build": "tsup",
-    "test": "vitest",
-    "ci": "pnpm run build && pnpm run check:format && pnpm run check:exports",
+    "test": "vitest run",
     "format": "prettier --write .",
+    "lint": "tsc",
     "check:format": "prettier --check .",
-    "check:exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm --ignore-rules=no-resolution"
+    "check:exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm --ignore-rules=no-resolution",
+    "ci": "pnpm run lint && pnpm run check:format && pnpm run test && pnpm run build && pnpm run check:exports"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
