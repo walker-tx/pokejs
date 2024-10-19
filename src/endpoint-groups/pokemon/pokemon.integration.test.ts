@@ -79,7 +79,7 @@ describe("endpoints/pokemon/pokemon", () => {
 
       // Check that the error message is correct
       expect(result.error.message).toBe(
-        "The name of the Pokémon cannot be empty.",
+        "The name of the Pokémon cannot be empty."
       );
     });
   });

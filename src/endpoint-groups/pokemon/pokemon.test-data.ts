@@ -2303,6 +2303,17 @@ export const getOneResult = {
             url: "https://pokeapi.co/api/v2/move-learn-method/1/",
           },
           version_group: {
+            name: "legends-arceus",
+            url: "https://pokeapi.co/api/v2/version-group/24/",
+          },
+        },
+        {
+          level_learned_at: 1,
+          move_learn_method: {
+            name: "level-up",
+            url: "https://pokeapi.co/api/v2/move-learn-method/1/",
+          },
+          version_group: {
             name: "scarlet-violet",
             url: "https://pokeapi.co/api/v2/version-group/25/",
           },
@@ -2756,6 +2767,17 @@ export const getOneResult = {
           },
         },
         {
+          level_learned_at: 29,
+          move_learn_method: {
+            name: "level-up",
+            url: "https://pokeapi.co/api/v2/move-learn-method/1/",
+          },
+          version_group: {
+            name: "legends-arceus",
+            url: "https://pokeapi.co/api/v2/version-group/24/",
+          },
+        },
+        {
           level_learned_at: 36,
           move_learn_method: {
             name: "level-up",
@@ -3201,6 +3223,17 @@ export const getOneResult = {
           version_group: {
             name: "brilliant-diamond-and-shining-pearl",
             url: "https://pokeapi.co/api/v2/version-group/23/",
+          },
+        },
+        {
+          level_learned_at: 9,
+          move_learn_method: {
+            name: "level-up",
+            url: "https://pokeapi.co/api/v2/move-learn-method/1/",
+          },
+          version_group: {
+            name: "legends-arceus",
+            url: "https://pokeapi.co/api/v2/version-group/24/",
           },
         },
         {
@@ -3693,6 +3726,17 @@ export const getOneResult = {
           version_group: {
             name: "brilliant-diamond-and-shining-pearl",
             url: "https://pokeapi.co/api/v2/version-group/23/",
+          },
+        },
+        {
+          level_learned_at: 47,
+          move_learn_method: {
+            name: "level-up",
+            url: "https://pokeapi.co/api/v2/move-learn-method/1/",
+          },
+          version_group: {
+            name: "legends-arceus",
+            url: "https://pokeapi.co/api/v2/version-group/24/",
           },
         },
         {
@@ -4627,6 +4671,17 @@ export const getOneResult = {
           version_group: {
             name: "brilliant-diamond-and-shining-pearl",
             url: "https://pokeapi.co/api/v2/version-group/23/",
+          },
+        },
+        {
+          level_learned_at: 5,
+          move_learn_method: {
+            name: "level-up",
+            url: "https://pokeapi.co/api/v2/move-learn-method/1/",
+          },
+          version_group: {
+            name: "legends-arceus",
+            url: "https://pokeapi.co/api/v2/version-group/24/",
           },
         },
         {
@@ -5868,6 +5923,17 @@ export const getOneResult = {
           version_group: {
             name: "sword-shield",
             url: "https://pokeapi.co/api/v2/version-group/20/",
+          },
+        },
+        {
+          level_learned_at: 15,
+          move_learn_method: {
+            name: "level-up",
+            url: "https://pokeapi.co/api/v2/move-learn-method/1/",
+          },
+          version_group: {
+            name: "legends-arceus",
+            url: "https://pokeapi.co/api/v2/version-group/24/",
           },
         },
         {
@@ -7621,6 +7687,17 @@ export const getOneResult = {
           },
         },
         {
+          level_learned_at: 21,
+          move_learn_method: {
+            name: "level-up",
+            url: "https://pokeapi.co/api/v2/move-learn-method/1/",
+          },
+          version_group: {
+            name: "legends-arceus",
+            url: "https://pokeapi.co/api/v2/version-group/24/",
+          },
+        },
+        {
           level_learned_at: 20,
           move_learn_method: {
             name: "level-up",
@@ -8620,6 +8697,17 @@ export const getOneResult = {
           version_group: {
             name: "brilliant-diamond-and-shining-pearl",
             url: "https://pokeapi.co/api/v2/version-group/23/",
+          },
+        },
+        {
+          level_learned_at: 37,
+          move_learn_method: {
+            name: "level-up",
+            url: "https://pokeapi.co/api/v2/move-learn-method/1/",
+          },
+          version_group: {
+            name: "legends-arceus",
+            url: "https://pokeapi.co/api/v2/version-group/24/",
           },
         },
         {
