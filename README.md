@@ -254,7 +254,7 @@ Then, use `useQuery` to fetch data with PokéJS and cache the response:
 ```tsx
 const MyComponent = () => {
   const { data, error, isLoading } = useQuery(["pokemon", "pikachu"], () =>
-    PokeJS.pokemon.getPokemonByName("pikachu")
+    PokeJS.pokemon.getPokemonByName("pikachu"),
   );
 
   if (isLoading) return <div>Loading...</div>;
