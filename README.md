@@ -24,6 +24,7 @@ well-organized, well-typed, and predictable!
   - [Thorough JSDoc](#thorough-jsdoc)
   - [Result Pattern](#result-pattern)
   - [Method Signatures & Naming](#method-signatures--naming)
+  - [Pagination](#pagination-1)
 - [Contributing](#contributing)
   - [Process](#process)
   - [Testing](#testing)
@@ -253,7 +254,7 @@ Then, use `useQuery` to fetch data with PokéJS and cache the response:
 ```tsx
 const MyComponent = () => {
   const { data, error, isLoading } = useQuery(["pokemon", "pikachu"], () =>
-    PokeJS.pokemon.getPokemonByName("pikachu"),
+    PokeJS.pokemon.getPokemonByName("pikachu")
   );
 
   if (isLoading) return <div>Loading...</div>;
@@ -323,7 +324,7 @@ through method overrides to find the one they need. Methods are named very
 explicitly, describing the kind of parameter they're expecting (e.g., `name` or
 `id`), to make code easier to read at a glance.
 
-#### Pagination
+### Pagination
 
 The pagination system in PokéJS is easier and safer than using the next and
 previous URLs from PokéAPI. Instead of dealing with URLs directly, PokéJS gives
