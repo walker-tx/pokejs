@@ -1,6 +1,7 @@
 import { BASE_API_URL } from "../../constants.js";
 import { PokeJsClientError, PokeJsHttpError } from "../../errors.js";
-import type { NamedAPIResourceList, Pokemon } from "../../types/poke-api.js";
+import { Pokemon } from "../../generated.js";
+import type { NamedAPIResourceList } from "../../types/poke-api.js";
 import type {
   PaginatedResult,
   PaginationInput,
@@ -17,11 +18,12 @@ import type {
  * to a Result containing either the fetched Pokémon data or an error.
  */
 async function _fetchPokemon(
-  nameOrId: string | number,
+  nameOrId: string | number
 ): Promise<Result<Pokemon, PokeJsHttpError>> {
   const response = await fetch(`${BASE_API_URL}/pokemon/${nameOrId}`);
 
-  if (response.ok) return { ok: true, data: await response.json() };
+  if (response.ok)
+    return { ok: true, data: new Pokemon(await response.json()) };
 
   return { ok: false, error: await PokeJsHttpError.fromResponse(response) };
 }
@@ -48,7 +50,7 @@ async function _fetchPokemon(
  * @see https://pokeapi.co/docs/v2#pokemon
  */
 export async function getPokemonByName(
-  name: string,
+  name: string
 ): Promise<Result<Pokemon, PokeJsClientError | PokeJsHttpError>> {
   if (name === "") {
     return {
@@ -81,7 +83,7 @@ export async function getPokemonByName(
  * @see https://pokeapi.co/docs/v2#pokemon
  */
 export async function getPokemonById(
-  id: number,
+  id: number
 ): Promise<Result<Pokemon, PokeJsHttpError>> {
   return _fetchPokemon(id);
 }
@@ -134,7 +136,7 @@ export async function getPokemonById(
  * @see https://pokeapi.co/docs/v2#named
  */
 export async function listPokemon(
-  paginationInput: PaginationInput = { limit: 20, offset: 0 },
+  paginationInput: PaginationInput = { limit: 20, offset: 0 }
 ): Promise<
   PaginatedResult<NamedAPIResourceList, PokeJsHttpError | PokeJsClientError>
 > {
