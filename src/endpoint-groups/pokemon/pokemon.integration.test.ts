@@ -9,15 +9,19 @@ import {
   vi,
 } from "vitest";
 import { PokeJsClientError, PokeJsHttpError } from "../../errors.js";
-import type { NamedAPIResourceList, Pokemon } from "../../types/poke-api.js";
 import { getPokemonById, getPokemonByName, listPokemon } from "./pokemon.js";
 import * as testData from "./pokemon.test-data.js";
+import {
+  NamedAPIResourceList_Response,
+  Pokemon,
+  Pokemon_Response,
+} from "../../generated.js";
 
 describe("endpoints/pokemon/pokemon", () => {
   beforeAll(() => {
     // type check the test data
-    assertType<Pokemon>(testData.getOneResult);
-    assertType<NamedAPIResourceList>(testData.listResult);
+    assertType<Pokemon_Response>(testData.getOneResult);
+    assertType<NamedAPIResourceList_Response>(testData.listResult);
   });
 
   // MARK: getPokemonByName
@@ -79,7 +83,7 @@ describe("endpoints/pokemon/pokemon", () => {
 
       // Check that the error message is correct
       expect(result.error.message).toBe(
-        "The name of the Pokémon cannot be empty.",
+        "The name of the Pokémon cannot be empty."
       );
     });
   });
@@ -139,7 +143,7 @@ describe("endpoints/pokemon/pokemon", () => {
       expect(result.data).toBeDefined();
 
       // Check that the data is typed correctly
-      expectTypeOf(result.data).toEqualTypeOf<NamedAPIResourceList>();
+      expectTypeOf(result.data).toEqualTypeOf<NamedAPIResourceList_Response>();
 
       // From the first page, there should be a `next` function
       expect(result.next).toBeDefined();
